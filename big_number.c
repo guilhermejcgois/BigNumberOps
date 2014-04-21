@@ -8,20 +8,20 @@
 #include "big_number.h"
 #include "doubly_linked_list.h"
 
-void add(Doubly_Linked_List* dest, Doubly_Linked_List source, Doubly_Linked_List source) {
+void add(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_List source2) {
 }
 
-void mult(Doubly_Linked_List* dest, Doubly_Linked_List source, Doubly_Linked_List source) {
+void mult(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_List source2) {
 }
 
 void readNumber(Doubly_Linked_List *number) {
 	char c;
-	while (c = getchar() != '\n' && c != ' ') {
+	while ((c = getchar()) != '\n' && c != ' ') {
 		if (c >= '0' && c <= '9') {
-			insertAtLast(&number, c - '0');
+			insertAtLast(number, c - '0');
 		}			
 	}
 }
 
-void sub(Doubly_Linked_List* dest, Doubly_Linked_List source, Doubly_Linked_List source) {
+void sub(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_List source2) {
 }
