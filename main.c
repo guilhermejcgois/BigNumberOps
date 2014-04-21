@@ -10,8 +10,10 @@
 #include "big_number.h"
 
 int main() {
-	int option;
-	Doubly_Linked_List num1, num2 result;
+	Doubly_Linked_List 	*num1 = NULL,
+						*num2 = NULL,
+						*result = NULL;
+
 	startList(num1);
 	startList(num2);
 	startList(result);
@@ -24,11 +26,11 @@ int main() {
 			if (isEmpty(num2) == 1)
 				exit(EXIT_SUCCESS);
 		
-		add(&result, num1, num2);
+		add(result, *num1, *num2);
 		print(result);
-		sub(&result, num1, num2);
+		sub(result, *num1, *num2);
 		print(result);
-		mult(&result, num1, num2);
+		mult(result, *num1, *num2);
 		print(result);
 	}
 }
