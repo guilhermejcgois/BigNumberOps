@@ -10,27 +10,28 @@
 #include "big_number.h"
 
 int main() {
-	Doubly_Linked_List 	*num1 = NULL,
-						*num2 = NULL,
-						*result = NULL;
+	Doubly_Linked_List 	num1 = NULL,
+				num2 = NULL,
+				result = NULL;
+	int numSize = 0;
 
-	startList(num1);
-	startList(num2);
-	startList(result);
+	startList(&num1);
+	startList(&num2);
+	startList(&result);
 	
-	while(1) {
-		readNumber(num1);
-		readNumber(num2);
-		
-		if (isEmpty(num1) == 1)
-			if (isEmpty(num2) == 1)
-				exit(EXIT_SUCCESS);
-		
-		add(result, *num1, *num2);
-		print(result);
-		sub(result, *num1, *num2);
-		print(result);
-		mult(result, *num1, *num2);
-		print(result);
-	}
+	scanf("%d", &numSize);
+	readNumber(&num1, numSize);
+	scanf("%d", &numSize);
+	readNumber(&num2, numSize);
+	
+	if (isEmpty(&num1) == 1)
+		if (isEmpty(&num2) == 1)
+			exit(EXIT_SUCCESS);
+	
+	add(&result, num1, num2);
+	print(result);
+	sub(&result, num1, num2);
+	print(result);
+	mult(&result, num1, num2);
+	print(result);
 }
