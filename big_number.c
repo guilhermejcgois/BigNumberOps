@@ -14,12 +14,14 @@ void add(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_Lis
 void mult(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_List source2) {
 }
 
-void readNumber(Doubly_Linked_List *number) {
+void readNumber(Doubly_Linked_List *number, int size) {
 	char c;
-	while ((c = getchar()) != '\n' && c != ' ') {
+	while (size > 0 ) {
+		c = getchar();
 		if (c >= '0' && c <= '9') {
 			insertAtLast(number, c - '0');
-		}			
+			size--;
+		}
 	}
 }
 
