@@ -1,3 +1,8 @@
+/* ========================================================================
+ * Copyright 2014 Guilherme J. C. Gois
+ * Licensed under MIT (https://github.com/guilhermegois/gois_lib/master/LICENSE)
+ * ======================================================================== */
+ 
 #include <stdlib.h>
 
 #include "doubly_linked_list.h"
