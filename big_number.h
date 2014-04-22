@@ -11,7 +11,7 @@
 
 void add(Doubly_Linked_List*, Doubly_Linked_List, Doubly_Linked_List);
 void mult(Doubly_Linked_List*, Doubly_Linked_List, Doubly_Linked_List);
-void readNumber(Doubly_Linked_List*);
+void readNumber(Doubly_Linked_List*, int);
 void sub(Doubly_Linked_List*, Doubly_Linked_List, Doubly_Linked_List);
 
 #endif
