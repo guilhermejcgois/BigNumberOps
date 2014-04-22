@@ -13,6 +13,9 @@ $(BIGN).o: $(BIGN).h $(BIGN).c
 
 $(LIST).o: $(LIST).h $(LIST).c
 	$(CC) $(CFLAGS) $(LIST).h $(LIST).c
+
+debug: $(BIGN).o $(LIST).o main.c
+	$(CC) -g $(BIGN).o $(LIST).o main.c -o $(BIGN)
 	
 clean:
 	rm -rf *o *~ list
