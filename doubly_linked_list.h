@@ -1,3 +1,8 @@
+/* ========================================================================
+ * Copyright 2014 Guilherme J. C. Gois
+ * Licensed under MIT (https://github.com/guilhermegois/gois_lib/master/LICENSE)
+ * ======================================================================== */
+ 
 #ifndef __DOUBLY_LINKED_LIST_H
 
 	#define __DOUBLY_LINKED_LIST_H
