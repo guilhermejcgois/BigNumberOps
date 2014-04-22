@@ -20,6 +20,9 @@
 		struct node*	last;
 	} Doubly_Linked_List;
 
+	void startList(Doubly_Linked_List*);
+	void endList(Doubly_Linked_List*);
+
 	void insertAtBeginning(Doubly_Linked_List*, elem_t);
 	void insertAtPrevious(Doubly_Linked_List*, Node, elem_t);
 	void insertAtNext(Doubly_Linked_List*, Node, elem_t);
@@ -29,5 +32,9 @@
 	int deleteAtPrevious(Doubly_Linked_List*, Node);
 	int deleteAtNext(Doubly_Linked_List*, Node);
 	int deleteAtLast(Doubly_Linked_List*);
+	
+	Node* createNode(int);
+	int isEmpty(Doubly_Linked_List*);
+	void print(Doubly_Linked_List);
 
 #endif
