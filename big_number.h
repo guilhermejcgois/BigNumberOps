@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright 2014 Guilherme J. C. Gois
+ * Copyright 2014 Guilherme J. C. Gois & Felipe L. Lara
  * Licensed under MIT (https://github.com/guilhermegois/gois_lib/master/LICENSE)
  * ======================================================================== */
 
