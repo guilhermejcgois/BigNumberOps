@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright 2014 Guilherme J. C. Gois
+ * Copyright 2014 Guilherme J. C. Gois & Felipe L Lara
  * Licensed under MIT (https://github.com/guilhermegois/gois_lib/master/LICENSE)
  * ======================================================================== */
  
@@ -15,10 +15,12 @@
 		struct node*	next;
 	} Node;
 
-	typedef struct list {
-		struct node*	first;
-		struct node*	last;
-	} Doubly_Linked_List;
+	typedef Node* Doubly_Linked_List;
+
+	typedef struct head {
+		Doubly_Linked_List	first;
+		Doubly_Linked_List	last;
+	} Head;
 
 	void startList(Doubly_Linked_List*);
 	void endList(Doubly_Linked_List*);
@@ -35,6 +37,6 @@
 	
 	Node* createNode(int);
 	int isEmpty(Doubly_Linked_List*);
-	void print(Doubly_Linked_List);
+	void print(Doubly_Linked_List*);
 
 #endif
