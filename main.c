@@ -1,6 +1,6 @@
 /* ========================================================================
  * Copyright 2014 Guilherme J. C. Gois & Felipe L. Lara
- * Licensed under MIT (https://github.com/guilhermegois/gois_lib/master/LICENSE)
+ * Licensed under MIT (https://github.com/guilhermegois/Big_Number_Ops/master/LICENSE)
  * ======================================================================== */
 
 #include <stdio.h>

@@ -1,6 +1,6 @@
 /* ========================================================================
  * Copyright 2014 Guilherme J. C. Gois & Felipe L. Lara
- * Licensed under MIT (https://github.com/guilhermegois/gois_lib/master/LICENSE)
+ * Licensed under MIT (https://github.com/guilhermegois/Big_Number_Ops/master/LICENSE)
  * ======================================================================== */
 
 #include <stdio.h>
@@ -8,9 +8,25 @@
 #include "big_number.h"
 #include "doubly_linked_list.h"
 
-void add(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_List source2) {
-	int a,c=0,cont=1;
+int addc(Doubly_Linked_List* dest, Node source1, Node source2, int carryIn) {
+    int carryOut = 0, aux = 0;
+    
+    aux = source1.info + source2.info;
+    
+    insertAtBeginning(dest, aux);
+    
+    if (source1.prev == NULL && source2.prev == NULL)
+        return carryOut;
+    return addc(dest, *(source1.prev), *(source2.prev), carryOut);
+}
+
+void add(Number *dest, Number src1, Number src2) {
+	int carry = 0;
 	
+	if ((carry = addc(dest->list, *(src1.last), *(src2.last), 0)) != 0)
+	    insertAtBeginning(dest->list, carry);
+	
+	/*int a,c=0,cont=1;
 	
 	while((*source1).next != NULL || (*source2).next != NULL)
 	{
@@ -38,7 +54,7 @@ void add(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_Lis
 			
 
 		}
-		/*else 
+		/else 
 			if(source1.last != NULL && source2.last == NULL) {
 			a = source1.last->info + c;
 			insertAtLast(dest,a);
@@ -53,20 +69,10 @@ void add(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_Lis
 			insertAtLast(dest,a);
 			source2.last = source2.last->prev;
 			printf("E3\n");
-		}*/
-
-
-
-		
-
-	}
-
-
-
-
-
+		}/
+	}*/
 }
-void mult(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_List source2) {
+void mult(Number *dest, Number src1, Number src2) {
 }
 
 void readNumber(Doubly_Linked_List *number, int size) {
@@ -80,5 +86,11 @@ void readNumber(Doubly_Linked_List *number, int size) {
 	}
 }
 
-void sub(Doubly_Linked_List* dest, Doubly_Linked_List source1, Doubly_Linked_List source2) {
+void sub(Number *dest, Number src1, Number src2) {
+    Node *node;
+    
+    for (node = src2.first; node != NULL; node = node->next)
+        node->info *= -1;
+    
+    add(dest, src1, src2);
 }

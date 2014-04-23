@@ -1,6 +1,6 @@
 /* ========================================================================
  * Copyright 2014 Guilherme J. C. Gois & Felipe L Lara
- * Licensed under MIT (https://github.com/guilhermegois/gois_lib/master/LICENSE)
+ * Licensed under MIT (https://github.com/guilhermegois/Big_Number_Ops/master/LICENSE)
  * ======================================================================== */
  
 #ifndef __DOUBLY_LINKED_LIST_H
@@ -26,17 +26,18 @@
 	void endList(Doubly_Linked_List*);
 
 	void insertAtBeginning(Doubly_Linked_List*, elem_t);
-	void insertAtPrevious(Doubly_Linked_List*, Node, elem_t);
-	void insertAtNext(Doubly_Linked_List*, Node, elem_t);
+	void insert(Doubly_Linked_List*, elem_t);
 	void insertAtLast(Doubly_Linked_List*, elem_t);
 
-	int deleteAtBeginning(Doubly_Linked_List*);
-	int deleteAtPrevious(Doubly_Linked_List*, Node);
-	int deleteAtNext(Doubly_Linked_List*, Node);
-	int deleteAtLast(Doubly_Linked_List*);
+	int deleteAtBeginning(Doubly_Linked_List*, elem_t*);
+	int delete(Doubly_Linked_List*, elem_t);
+	int deleteAtLast(Doubly_Linked_List*, elem_t*);
 	
 	Node* createNode(int);
 	int isEmpty(Doubly_Linked_List*);
+	int isOrdered(Doubly_Linked_List*);
+	void invert(Doubly_Linked_List*);
 	void print(Doubly_Linked_List*);
+	void printWithoutSpace(Doubly_Linked_List*);
 
 #endif
