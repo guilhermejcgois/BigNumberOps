@@ -8,17 +8,12 @@
 #ifndef __BIG_NUMBER_H
 
 	#define __BIG_NUMBER_H
-	
-typedef struct number {
-    Doubly_Linked_List  *list;
-    Node                *first;
-    Node                *last;
-} Number;
 
-int addc(Doubly_Linked_List*, Node, Node, int);
-void add(Number*, Number, Number);
-void mult(Number*, Number, Number);
+int addc(Doubly_Linked_List*, Node*, Node*, int);
+void add(Doubly_Linked_List*, Doubly_Linked_List, Doubly_Linked_List);
+void mult(Doubly_Linked_List*, Doubly_Linked_List, Doubly_Linked_List);
 void readNumber(Doubly_Linked_List*, int);
-void sub(Number*, Number, Number);
+int subc(Doubly_Linked_List*, Node*, Node*, int);
+void sub(Doubly_Linked_List*, Doubly_Linked_List, Doubly_Linked_List);
 
 #endif

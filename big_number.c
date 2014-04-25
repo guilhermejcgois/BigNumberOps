@@ -8,71 +8,38 @@
 #include "big_number.h"
 #include "doubly_linked_list.h"
 
-int addc(Doubly_Linked_List* dest, Node source1, Node source2, int carryIn) {
+int addc(Doubly_Linked_List* dest, Node *source1, Node *source2, int carryIn) {
     int carryOut = 0, aux = 0;
     
-    aux = source1.info + source2.info;
+    if (source1 != NULL) {
+        aux = source1->info;
+        if (source2 != NULL)
+	        aux += source2->info;
+    } else {
+        aux = source2->info;
+    }
+    aux += carryIn;
+
+    if (aux > 9) {
+        carryOut++;
+        aux %= 10;
+    }
     
     insertAtBeginning(dest, aux);
     
-    if (source1.prev == NULL && source2.prev == NULL)
+    if ((source1 == NULL || source1->prev == NULL) && (source2 == NULL || source2->prev == NULL))
         return carryOut;
-    return addc(dest, *(source1.prev), *(source2.prev), carryOut);
+    return addc(dest, source1->prev, source2->prev, carryOut);
 }
 
-void add(Number *dest, Number src1, Number src2) {
+void add(Doubly_Linked_List *dest, Doubly_Linked_List src1, Doubly_Linked_List src2) {
 	int carry = 0;
 	
-	if ((carry = addc(dest->list, *(src1.last), *(src2.last), 0)) != 0)
-	    insertAtBeginning(dest->list, carry);
-	
-	/*int a,c=0,cont=1;
-	
-	while((*source1).next != NULL || (*source2).next != NULL)
-	{
-		
-		if((*source1).next != NULL && (*source2).next != NULL) {
-			a = (*source1).next->info + (*source2).next->info + c;
-			if(a > 9)
-			{ // verificar se a > 9 e pegar o carry (a / 10)
-				c = 1;
-				a = a % 10;
-				
-				insertAtBeginning(dest,a);
-			}
-			else
-			{
-				c=0;
-				insertAtBeginning(dest,a);
-				
-			}
-			
-			
-			(*source1).next = (*source1).next->prev;
-			(*source2).next = (*source2).next->prev;
-			
-			
-
-		}
-		/else 
-			if(source1.last != NULL && source2.last == NULL) {
-			a = source1.last->info + c;
-			insertAtLast(dest,a);
-			source1.last = source1.last->prev;
-			printf("E2\n");
-			
-		}
-		else 
-			if(source1.last == NULL && source2.last != NULL) {
-
-			a = source2.last->info + c;
-			insertAtLast(dest,a);
-			source2.last = source2.last->prev;
-			printf("E3\n");
-		}/
-	}*/
+	if ((carry = addc(dest, getLastNode(&src1), getLastNode(&src2), 0)) > 0)
+	    insertAtBeginning(dest, carry);
 }
-void mult(Number *dest, Number src1, Number src2) {
+
+void mult(Doubly_Linked_List *dest, Doubly_Linked_List src1, Doubly_Linked_List src2) {
 }
 
 void readNumber(Doubly_Linked_List *number, int size) {
@@ -86,11 +53,38 @@ void readNumber(Doubly_Linked_List *number, int size) {
 	}
 }
 
-void sub(Number *dest, Number src1, Number src2) {
-    Node *node;
+int subc(Doubly_Linked_List* dest, Node *source1, Node *source2, int carryIn) {
+    int carryOut = 0, aux = 0;
     
-    for (node = src2.first; node != NULL; node = node->next)
-        node->info *= -1;
+    if (source1 != NULL) {
+        aux = source1->info;
+        if (source2 != NULL) {
+            if (aux < source2->info)
+                aux += 10;
+	        aux -= source2->info;
+            carryOut--;
+        }
+    } else {
+        aux -= source2->info;
+    }
+    aux += carryIn;
     
-    add(dest, src1, src2);
+    insertAtBeginning(dest, aux);
+    
+    if ((source1 == NULL || source1->prev == NULL) && (source2 == NULL || source2->prev == NULL))
+        return carryOut;
+    return subc(dest, source1->prev, source2->prev, carryOut);
+}
+
+void sub(Doubly_Linked_List *dest, Doubly_Linked_List src1, Doubly_Linked_List src2) {
+    int carry = 0;
+    
+    /*if (getLength(&src2) > getLength(&src1)) {
+        if ((carry = subc(dest, getLastNode(&src2), getLastNode(&src1), 0)) > 0)
+    	    insertAtBeginning(dest, carry);
+        (*dest)->info *= -1;
+    } else {*/
+        if ((carry = subc(dest, getLastNode(&src1), getLastNode(&src2), 0)) > 0)
+	        insertAtBeginning(dest, carry);
+    //}
 }

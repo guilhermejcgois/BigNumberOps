@@ -11,7 +11,7 @@
 
 	typedef struct node {
 		struct node*	prev;
-		elem_t			info;
+		elem_t		info;
 		struct node*	next;
 	} Node;
 
@@ -34,6 +34,8 @@
 	int deleteAtLast(Doubly_Linked_List*, elem_t*);
 	
 	Node* createNode(int);
+	Node* getLastNode(Doubly_Linked_List*);
+	int getLength(Doubly_Linked_List*);
 	int isEmpty(Doubly_Linked_List*);
 	int isOrdered(Doubly_Linked_List*);
 	void invert(Doubly_Linked_List*);

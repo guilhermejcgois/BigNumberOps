@@ -37,7 +37,7 @@ void insert(Doubly_Linked_List* list, elem_t elem) {
 		insertAtBeginning(list, elem);		
 	} else {
 		aux = *list;
-		while (aux->next-data <= newNode->data)
+		while (aux->next->info <= newNode->info)
 			aux = aux->next;
 		newNode->next = aux->next;
 		aux->next = newNode;
@@ -63,15 +63,14 @@ void insertAtLast(Doubly_Linked_List* list, elem_t elem) {
 int deleteAtBeginning(Doubly_Linked_List* list, elem_t *elem) {
 	if (isEmpty(list))
 	    return 0;
-	
-	
+	return 1;	
 }
 
 int delete(Doubly_Linked_List* list, elem_t elem) {
 	Node *node;
 	
 	for (node = *list; node != NULL; node = node->next) {
-	    if (node->data == elem) {
+	    if (node->info == elem) {
 	        node->prev->next = node->next;
 	        node->next->prev = node->prev;
 	        free(node);
@@ -95,6 +94,27 @@ Node* createNode(int elem) {
 	return newNode;
 }
 
+Node* getLastNode(Doubly_Linked_List* list) {
+	Node *lastNode = NULL;
+
+	if (!isEmpty(list))
+		for (lastNode = *list; lastNode->next != NULL; lastNode = lastNode->next);
+
+	return lastNode;
+}
+
+int getLength(Doubly_Linked_List* list) {
+	int length = 0;
+	Node *lastNode = NULL;
+
+	if (isEmpty(list))
+		return 0;
+	for (lastNode = *list; lastNode->next != NULL; lastNode = lastNode->next)
+		length++;
+
+	return length;
+}
+
 int isEmpty(Doubly_Linked_List* list) {
 	if (*list == NULL)
 		return 1;
@@ -104,8 +124,8 @@ int isEmpty(Doubly_Linked_List* list) {
 int isOrdered(Doubly_Linked_List* list) {
     Node* aux;
     aux = *list;
-	while (aux = aux->next != NULL)
-		if (aux->data > aux->next->data)
+	while ((aux = aux->next) != NULL)
+		if (aux->info > aux->next->info)
 		    return 0;
 	return 1;
 }
@@ -124,7 +144,7 @@ void print(Doubly_Linked_List* list) {
 	puts("\n");
 }
 
-void print(Doubly_Linked_List* list) {
+void printWithoutSpace(Doubly_Linked_List* list) {
 	Node *node;
 	node = *list;
 	while (node != NULL) {

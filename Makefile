@@ -18,4 +18,4 @@ debug: $(BIGN).o $(LIST).o main.c
 	$(CC) -g $(BIGN).o $(LIST).o main.c -o $(BIGN)
 	
 clean:
-	rm -rf *o *~ list
+	rm -rf *o *~ *gch list
