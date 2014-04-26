@@ -8,6 +8,13 @@
 #include "big_number.h"
 #include "doubly_linked_list.h"
 
+void add(Doubly_Linked_List *dest, Doubly_Linked_List src1, Doubly_Linked_List src2) {
+	int carry = 0;
+	
+	if ((carry = addc(dest, getLastNode(&src1), getLastNode(&src2), 0)) > 0)
+	    insertAtBeginning(dest, carry);
+}
+
 int addc(Doubly_Linked_List* dest, Node *source1, Node *source2, int carryIn) {
     int carryOut = 0, aux = 0;
     
@@ -21,7 +28,7 @@ int addc(Doubly_Linked_List* dest, Node *source1, Node *source2, int carryIn) {
     aux += carryIn;
 
     if (aux > 9) {
-        carryOut++;
+        carryOut = 1;
         aux %= 10;
     }
     
@@ -32,37 +39,20 @@ int addc(Doubly_Linked_List* dest, Node *source1, Node *source2, int carryIn) {
     return addc(dest, source1->prev, source2->prev, carryOut);
 }
 
-void add(Doubly_Linked_List *dest, Doubly_Linked_List src1, Doubly_Linked_List src2) {
-	int carry = 0;
-	
-	if ((carry = addc(dest, getLastNode(&src1), getLastNode(&src2), 0)) > 0)
-	    insertAtBeginning(dest, carry);
-}
-
 void mult(Doubly_Linked_List *dest, Doubly_Linked_List src1, Doubly_Linked_List src2) {
 }
 
-void readNumber(Doubly_Linked_List *number, int size) {
-	char c;
-	while (size > 0 ) {
-		c = getchar();
-		if (c >= '0' && c <= '9') {
-			insertAtLast(number, c - '0');
-			size--;
-		}
-	}
-}
-
-int subc(Doubly_Linked_List* dest, Node *source1, Node *source2, int carryIn) {
+int multc(Doubly_Linked_List* dest, Node *source1, Node *source2, int carryIn) {
     int carryOut = 0, aux = 0;
     
     if (source1 != NULL) {
         aux = source1->info;
         if (source2 != NULL) {
-            if (aux < source2->info)
+            if (aux <= source2->info) {
                 aux += 10;
+                carryOut = -1;
+            }
 	        aux -= source2->info;
-            carryOut--;
         }
     } else {
         aux -= source2->info;
@@ -76,6 +66,17 @@ int subc(Doubly_Linked_List* dest, Node *source1, Node *source2, int carryIn) {
     return subc(dest, source1->prev, source2->prev, carryOut);
 }
 
+void readNumber(Doubly_Linked_List *number, int size) {
+	char c;
+	while (size > 0 ) {
+		c = getchar();
+		if (c >= '0' && c <= '9') {
+			insertAtLast(number, c - '0');
+			size--;
+		}
+	}
+}
+
 void sub(Doubly_Linked_List *dest, Doubly_Linked_List src1, Doubly_Linked_List src2) {
     int carry = 0;
     
@@ -84,7 +85,31 @@ void sub(Doubly_Linked_List *dest, Doubly_Linked_List src1, Doubly_Linked_List s
     	    insertAtBeginning(dest, carry);
         (*dest)->info *= -1;
     } else {*/
-        if ((carry = subc(dest, getLastNode(&src1), getLastNode(&src2), 0)) > 0)
+        if ((carry = subc(dest, getLastNode(&src1), getLastNode(&src2), 0)) < 0)
 	        insertAtBeginning(dest, carry);
     //}
+}
+
+int subc(Doubly_Linked_List* dest, Node *source1, Node *source2, int carryIn) {
+    int carryOut = 0, aux = 0;
+    
+    if (source1 != NULL) {
+        aux = source1->info;
+        if (source2 != NULL) {
+            if (aux <= source2->info) {
+                aux += 10;
+                carryOut = -1;
+            }
+	        aux -= source2->info;
+        }
+    } else {
+        aux -= source2->info;
+    }
+    aux += carryIn;
+    
+    insertAtBeginning(dest, aux);
+    
+    if ((source1 == NULL || source1->prev == NULL) && (source2 == NULL || source2->prev == NULL))
+        return carryOut;
+    return subc(dest, source1->prev, source2->prev, carryOut);
 }
