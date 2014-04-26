@@ -11,6 +11,7 @@
 
 int addc(Doubly_Linked_List*, Node*, Node*, int);
 void add(Doubly_Linked_List*, Doubly_Linked_List, Doubly_Linked_List);
+void multc(Doubly_Linked_List*, Node*, Node*, int);
 void mult(Doubly_Linked_List*, Doubly_Linked_List, Doubly_Linked_List);
 void readNumber(Doubly_Linked_List*, int);
 int subc(Doubly_Linked_List*, Node*, Node*, int);
